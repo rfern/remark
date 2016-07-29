@@ -23,12 +23,33 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_Rkfsf2_5bxg2DYbDOpH4xfAr2cIjIEo&callback=initMap" async defer>
 </script>
 <script>
+      var map;
       function initMap() {
         var mapDiv = document.getElementById('map');
-        var map = new google.maps.Map(mapDiv, {
-            center: {lat: -27.469, lng: 153.025},
+        var brisbane = {lat: -27.469, lng: 153.025};
+        map = new google.maps.Map(mapDiv, {
+            center: brisbane,
             zoom: 8
         });
+
+        // place a test image as a marker
+        var img = "img/test.png";
+        placeMapMarker(-27.469, 153.025, img)
       }
+
+      function placeMapMarker(latitude, longitude, image) {
+            var contentString = "<div> <h3>Some interesting info</h3> </div>";
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+            var marker = new google.maps.Marker({
+                position: {lat: latitude, lng: longitude},
+                map: map,
+                icon: image
+            });
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+            });
+	  }
 </script>
 </html>
