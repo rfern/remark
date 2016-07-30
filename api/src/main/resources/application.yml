@@ -1,0 +1,11 @@
+server:
+  port: 8080
+  context: /remark
+
+swagger:
+  title: Remark(able) API
+  description: Simple API for accessing remark(able) data
+  contact:
+    name: Richard Allwood
+    url: TODO
+    email: richard.m.allwood@gmail.com

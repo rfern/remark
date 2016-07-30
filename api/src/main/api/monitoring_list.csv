@@ -1,0 +1,228 @@
+Monitor,Site name,Latitude,Longitude
+Air quality,Abbot Point,-19.9496,148.0482
+Air quality,Aldoga,-23.8403,151.0628
+Air quality,Arundel,-27.9441,153.3656
+Air quality,Auckland Point,-23.8351,151.2539
+Air quality,Ayr,-19.5839,147.4059
+Air quality,Boat Creek,-23.8199,151.1538
+Air quality,Boyne Island,-23.9408,151.3507
+Air quality,Brisbane CBD,-27.4774,153.0281
+Air quality,Cannon Hill,-27.4654,153.0872
+Air quality,Clinton,-27.3713,151.5934
+Air quality,Clinton,-27.4187,153.133
+Air quality,Clinton,-19.3212,146.8422
+Air quality,Deception Bay,-27.4296,153.1581
+Air quality,Deception Bay,-27.1935,153.0347
+Air quality,Flinders View,-27.6528,152.7741
+Air quality,Gatton,-27.5434,152.3343
+Air quality,Jondaryan,-27.3713,151.5934
+Air quality,Josephville,-27.9962,152.9255
+Air quality,Josephville,-28.0121,152.9217
+Air quality,Lutwyche,-27.4166,153.0376
+Air quality,Lytton,-27.4065,153.1527
+Air quality,Memorial Park,-23.8443,151.2517
+Air quality,Menzies,-20.7167,139.492
+Air quality,Moranbah,-21.9995,148.0713
+Air quality,Mountain Creek,-26.6917,153.1038
+Air quality,Mutdapilly,-27.7528,152.6509
+Air quality,North Maclean,-27.7708,153.03
+Air quality,Pimlico,-19.2871,146.7813
+Air quality,Pinkenba,-27.4187,153.133
+Air quality,Rocklea,-27.5358,152.9934
+Air quality,South Brisbane,-27.4848,153.0321
+Air quality,South Gladstone,-23.8626,151.2705
+Air quality,Springwood,-27.6125,153.1359
+Air quality,Stuart,-19.3212,146.8422
+Air quality,Targinie,-23.7744,151.1055
+Air quality,The Gap,-20.7264,139.4977
+Air quality,Townsville Coast Guard,-19.2542,146.8257
+Air quality,West Mackay,-21.1595,149.1549
+Air quality,Woolloongabba,-27.4975,153.035
+Air quality,Wynnum North,-27.4296,153.1581
+Air quality,Wynnum West,-27.4379,153.1495
+Storm tide,Boigu Island,-9.24368,142.25396
+Storm tide,Bowen,-20.0245,148.2506
+Storm tide,Burketown,-17.73335,139.5929
+Storm tide,Burnett Heads,-24.7611,152.4005
+Storm tide,Cairns,-16.9276,145.7788
+Storm tide,Cape Ferguson,-19.279,147.0575
+Storm tide,Cardwell,-18.2636,146.0261
+Storm tide,Clump Point,-17.8515,146.1053
+Storm tide,Cooktown,-15.4608,145.2486
+Storm tide,Dalrymple Bay,-21.2519,149.3032
+Storm tide,Dauan Island,-9.41119,142.53833
+Storm tide,Iama Island,-9.89919,142.766
+Storm tide,Karumba,-17.4883,140.8346
+Storm tide,Laguna Marina,-20.6055,148.6776
+Storm tide,Lucinda,-18.5216,146.3853
+Storm tide,Mackay,-21.1066,149.2258
+Storm tide,Moa Island (Kubin),-10.23609,142.21449
+Storm tide,Moa Island (St Pauls),-10.19568,142.33412
+Storm tide,Mooloolaba,-26.6856,153.1326
+Storm tide,Mornington Island,-16.6678,139.1708
+Storm tide,Mossman,-16.4358,145.4031
+Storm tide,Mourilyan,-17.6011,146.1238
+Storm tide,Palm Cove,-16.7397,145.6727
+Storm tide,Port Alma,-23.5856,150.8595
+Storm tide,Rosslyn Bay,-23.1666,150.7916
+Storm tide,Shute Harbour,-20.2941,148.7848
+Storm tide,Southtrees Island,-23.8538,151.3136
+Storm tide,Thursday Island,-10.5863,142.2215
+Storm tide,Townsville,-19.2538,146.8295
+Storm tide,Ugar Island,-9.50458,143.5468
+Storm tide,Urangan,-25.2961,152.9105
+Storm tide,Weipa,-12.67,141.8623
+Storm tide,Scarborough,-27.183333,153.1
+Storm tide,Gold Coast,-27.933333,153.416667
+Water quality,Baffle Creek,-24.50861,151.9279
+Water quality,Bramble Bay,-27.28288,153.1034
+Water quality,Burnett River,-24.86491,152.3439
+Water quality,Boyne River (0.0km at mouth),-23.933611,151.356667
+Water quality,Boyne River (12.0km from mouth),-24.0044,151.34098
+Water quality,Boyne River (2.7km from mouth),-23.958,151.35955
+Water quality,Boyne River (4.7km from mouth),-23.96854,151.34711
+Water quality,Boyne River (5.1km from mouth at junction with south trees inlet),-23.972222,151.344722
+Water quality,Boyne River (8.6km from mouth),-23.983611,151.317778
+Water quality,South Trees Inlet (20.0km from mouth 100m from junction with Boyne River),-23.97,151.344
+Water quality,Fitzroy River (10.0km from mouth),-23.507222,150.785833
+Water quality,Fitzroy River (15.0km from mouth),-23.494444,150.736389
+Water quality,Fitzroy River (2.5km from mouth),-23.53169,150.83022
+Water quality,Fitzroy River (20.0km from mouth),-23.50538,150.70867
+Water quality,Fitzroy River (28.1km from mouth),-23.51081,150.63332
+Water quality,Fitzroy River (33.8km from mouth),-23.48811,150.66154
+Water quality,Fitzroy River (39.6km from mouth),-23.4556,150.62602
+Water quality,Fitzroy River (45.2km from mouth),-23.42091,150.58995
+Water quality,Fitzroy River (50.2km from mouth),-23.3817,150.55864
+Water quality,Fitzroy River (52.6km from mouth),-23.38146,150.54811
+Water quality,Fitzroy River (55.1km from mouth),-23.39161,150.52815
+Water quality,Fitzroy River (57.3km from mouth),-23.37512,150.51404
+Water quality,Fitzroy River (59.6km from mouth),-23.36216,150.50066
+Water quality,Calliope River (0.0km at mouth),-23.8225,151.219722
+Water quality,Calliope River (1.6km from mouth),-23.835278,151.222778
+Water quality,Calliope River (11.3km from mouth),-23.873889,151.191667
+Water quality,Calliope River (12.9km from mouth),-23.887778,151.190556
+Water quality,Calliope River (14.5km from mouth),-23.899444,151.185833
+Water quality,Calliope River (16.1km from mouth),-23.91366,151.183
+Water quality,Calliope River (3.2km from mouth),-23.84666,151.21142
+Water quality,Calliope River (4.8km from mouth),-23.85866,151.20506
+Water quality,Calliope River (6.4km from mouth),-23.86781,151.18672
+Water quality,Calliope River (anabranch 2.8km u/s of junction with Calliope River),-23.840278,151.196944
+Water quality,Baffle Creek (10.0km from mouth),-24.51751,151.98478
+Water quality,Baffle Creek (11.0km from mouth),-24.51396,151.97188
+Water quality,Baffle Creek (16.0km from mouth),-24.50786,151.92729
+Water quality,Baffle Creek (23.5km from mouth),-24.54226,151.90452
+Water quality,Baffle Creek (4.1km from mouth),-24.52976,152.03367
+Water quality,Baffle Creek (8.5km from mouth),-24.51602,151.9982
+Water quality,Kolan River (0.0km at mouth),-24.66822,152.20521
+Water quality,Kolan River (1.6km from mouth),-24.681111,152.196389
+Water quality,Kolan River (12.0km from mouth),-24.7178,152.17464
+Water quality,Kolan River (5.3km from mouth),-24.693611,152.163889
+Water quality,Kolan River (8.1km from mouth),-24.699444,152.183889
+Water quality,Burnett River (0.0km at mouth),-24.754167,152.408889
+Water quality,Burnett River (11.4km from mouth),-24.808611,152.358889
+Water quality,Burnett River (14.7km from mouth),-24.846389,152.368611
+Water quality,Burnett River (17.4km from mouth opposite Bundaberg Creek),-24.86188,152.35625
+Water quality,Burnett River (18.7km from mouth - QFB jetty),-24.8647,152.34343
+Water quality,Burnett River (20.3km from mouth at eastern end of Harriet Island),-24.863611,152.325278
+Water quality,Burnett River (23.5km from mouth at Splitters Creek),-24.870278,152.294722
+Water quality,Burnett River (4.8km from mouth),-24.771667,152.380278
+Water quality,Burnett River (6.0km from mouth),-24.785278,152.383056
+Water quality,Burnett River (8.5km from mouth),-24.799444,152.378056
+Water quality,Burrum River (0.0km at mouth at junction with Gregory River),-25.177778,152.556389
+Water quality,Burrum River (12.7km u/s of junction with Gregory River),-25.265833,152.568889
+Water quality,Burrum River (19.2km u/s of junction with Gregory River),-25.31491,152.58929
+Water quality,Burrum River (5.5km u/s of junction with Gregory River),-25.22177,152.54153
+Water quality,Isis River (10.0km from mouth),-25.219167,152.465
+Water quality,Isis River (3.0km from mouth),-25.219722,152.514444
+Water quality,Isis River (6.0km from mouth),-25.2093,152.49536
+Water quality,Gregory River (3.0km from mouth),-25.16821,152.5335
+Water quality,Gregory River (5.8km from mouth),-25.148333,152.518611
+Water quality,Gregory River (9.5km from mouth),-25.157778,152.501111
+Water quality,Mary River ( 6.0km from mouth opposite Horseshoe Brook),-25.458056,152.882222
+Water quality,Mary River (12.2km from mouth opposite Crab Island),-25.49389,152.83325
+Water quality,Mary River (17.7km from mouth west of Brothers Island - old station 15),-25.503611,152.79
+Water quality,Mary River (22.5km from mouth - ld station 12),-25.500192,152.751053
+Water quality,Mary River (27.5km from mouth 100m u/s of Saltwater Creek),-25.473611,152.731944
+Water quality,Mary River (32.8km from mouth opposite Aubinville STP discharge - station 7),-25.519167,152.727778
+Water quality,Mary River (36.1km from mouth near end of Napier St Marybough),-25.539167,152.7075
+Water quality,Mary River (39.1km from mouth near Little Tinana Creek),-25.5575,152.725556
+Water quality,Mary River (42.2km from mouth 100m u/s of meat works discharge - station 2),-25.554444,152.706944
+Water quality,Mary River (45.4km from mouth near Brisk Street - old station 1),-25.53926,152.67963
+Water quality,Mary River (50.2km from mouth - old station 200),-25.5126,152.64806
+Water quality,Mary River (56.7km from mouth - north bank),-25.56331,152.62437
+Water quality,Hervey Bay (grid reference 906043 seaward end of Urangan Jetty),-25.2752,152.909
+Water quality,Great Sandy Straits (grid reference 000003 East Woody Island/Little Woody Island),-25.32136,153.00262
+Water quality,Great Sandy Straits (grid reference 924585 Boonooroo/Poona),-25.6867,152.92455
+Water quality,Great Sandy Straits (grid reference 929721 Boonlye Point),-25.56394,152.92619
+Water quality,Great Sandy Straits (grid reference 951657 Stewart Island),-25.63328,152.9541
+Water quality,Great Sandy Straits (grid reference 972882 yellow X beacon mouth Mary River),-25.42177,152.97327
+Water quality,Great Sandy Straits (grid reference 979534 Tinnanba),-25.735833,152.980278
+Water quality,Great Sandy Straits (grid reference 984797 Opposite Ungowa Jetty),-25.49922,152.98665
+Water quality,Tin Can Inlet (grid reference 011269 - AMTD 20.5),-25.97828,153.01157
+Water quality,Tin Can Inlet (grid reference 017339 - AMTD 11.2),-25.911667,153.018056
+Water quality,Tin Can Inlet (grid reference 021296 - AMTD 17.6),-25.95,153.0225
+Water quality,Tin Can Inlet (grid reference 028353 - AMTD 9.1),-25.90209,153.02067
+Water quality,Tin Can Inlet (grid reference 035320 - AMTD 14.9),-25.9319,153.036
+Water quality,Tin Can Inlet (grid reference 043376 - AMTD 6.4),-25.881631,153.041005
+Water quality,Snapper Creek (grid reference 004347 - AMTD 2.1),-25.904444,153.005
+Wave height and direction,Abbot Point,-19.86625,148.097417
+Wave height and direction,Albatross Bay,-12.6883,141.684
+Wave height and direction,Albatross Bay,-12.688,141.684667
+Wave height and direction,Bar Cutting wave pole,-27.331667,153.1958
+Wave height and direction,Bargara,-24.825,152.4717
+Wave height and direction,Bilinga,-28.138833,153.5042
+Wave height and direction,Bowen,-19.930833,148.2775
+Wave height and direction,Bramston Beach,-17.323667,146.0367
+Wave height and direction,Bribie Island,-26.9625,153.3472
+Wave height and direction,Brisbane,-27.483333,153.616667
+Wave height and direction,Brisbane,-27.4556,153.6171
+Wave height and direction,Burnett Heads,-24.457667,152.5866
+Wave height and direction,Cairns,-16.820833,145.7475
+Wave height and direction,Cairns (Clifton Beach Nearshore),-16.763833,145.6889
+Wave height and direction,Cairns (Holloways Beach Nearshore),-16.830667,145.75
+Wave height and direction,Cairns (Yorkeys Knob Nearshore),-16.802833,145.7333
+Wave height and direction,Caloundra,-26.8476,153.1557
+Wave height and direction,Cleveland Bay,-19.185333,146.9031
+Wave height and direction,Coonarr,-24.985667,152.5
+Wave height and direction,Dunk Island,-17.848333,146.185167
+Wave height and direction,Emu Park,-23.3,151.066666
+Wave height and direction,Gladstone,-21.883333,151.5
+Wave height and direction,Gold Coast,-27.962667,153.4415
+Wave height and direction,Hay Point,-21.2235,149.270333
+Wave height and direction,Hayman Island,-20.087833,148.708833
+Wave height and direction,Heron Is. Blue Pools,-23.429667,151.919667
+Wave height and direction,Heron Is. Wistari Ch.,-23.472167,151.938333
+Wave height and direction,Hervey Bay,-25.25,152.85
+Wave height and direction,Holloways Beach,-16.820833,145.7475
+Wave height and direction,Karumba inshore,-17.371833,140.708667
+Wave height and direction,Karumba offshore,-17.085833,140.296833
+Wave height and direction,Kirra,-28.157833,153.528833
+Wave height and direction,Lindeman Island,-20.390333,149.078667
+Wave height and direction,Long Island,-20.451667,148.901
+Wave height and direction,Low Islets,-16.393833,145.573667
+Wave height and direction,Lucinda,-18.515667,146.383333
+Wave height and direction,Mackay,-21.039967,149.545967
+Wave height and direction,Mackay - Blacks Beach,-21.043333,149.193333
+Wave height and direction,Mackay - Bucasia Beach,-21,149.183333
+Wave height and direction,Mackay - Far Beach,-21.193333,149.241167
+Wave height and direction,Mackay - Slade Point,-21.115667,149.233333
+Wave height and direction,Mackay Inner,-21.014667,149.338667
+Wave height and direction,Mooloolaba,-26.566,153.18117
+Wave height and direction,Moore Park,-24.708333,152.285667
+Wave height and direction,Moreton Bay,-27.250833,153.199167
+Wave height and direction,Nerang,-27.94,153.438667
+Wave height and direction,Noosa Nearshore 19,-26.383333,153.083333
+Wave height and direction,Noosa Nearshore Buoy 26,-26.3835,153.088833
+Wave height and direction,Noosa Offshore Buoy 20,-26.383333,153.133333
+Wave height and direction,North Moreton Bay,-26.8985,153.2788
+Wave height and direction,Repulse Bay,-20.628,148.858833
+Wave height and direction,Rosslyn Bay Nearshore,-23.1625,150.7875
+Wave height and direction,Rosslyn Bay Offshore,-23.079167,150.929167
+Wave height and direction,Toogoom,-25.23,152.706667
+Wave height and direction,Townsville,-19.159167,147.059333
+Wave height and direction,Weipa,-12.677167,141.741667
+Wave height and direction,Woodgate,-25.1,152.566667
+Wave height and direction,Woorim,-27.071167,153.208
+Wave height and direction,Yabulu,-19.139167,146.645333
+Wave height and direction,Yeppoon,-23.116667,151.066667
+Wave height and direction,Bundaberg,-24.6718,152.501
