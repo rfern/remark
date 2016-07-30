@@ -190,25 +190,25 @@ i.icon-2x {
                     <div>
                         <div class="checkbox">
                             <label>
-                                <input data-toggle="toggle" type="checkbox">
+                                <input id="airCheck" data-toggle="toggle" type="checkbox" checked>
                                 Air Quality
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input data-toggle="toggle" type="checkbox">
+                                <input id="stormCheck" data-toggle="toggle" type="checkbox" checked>
                                 Storm Tide
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input data-toggle="toggle" type="checkbox">
+                                <input id="waterCheck" data-toggle="toggle" type="checkbox" checked>
                                 Water Quality
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input data-toggle="toggle" type="checkbox">
+                                <input id="waveCheck" data-toggle="toggle" type="checkbox" checked>
                                 Wave height and direction
                             </label>
                         </div>
@@ -293,9 +293,13 @@ i.icon-2x {
 	}
 
 	var airQualityMarker = "img/windmill.png";
+	var airMarkers = [];
 	var stormTideMarker = "img/stormtide.png";
+	var stormMarkers = [];
 	var waterQualityMarker = "img/water.png";
+	var waterMarkers = [];
 	var waveHeightMarker = "img/wave.png";
+	var waveMarkers = [];
 
       function placeMapMarker(latitude, longitude, data) {
             var contentString = "<div> <h3>Monitor Info</h3><table>" +
@@ -309,34 +313,30 @@ i.icon-2x {
 			"</tr>" +
 		"</table></div>";
 
-            var image;
-            switch(data.Monitor) {
-                case "Air quality":
-                    image = airQualityMarker;
-                    console.log("Air!");
-                    break;
-                case "Storm tide":
-                    image = stormTideMarker;
-                    console.log("Storm!");
-                    break;
-                case "Water quality":
-                    image = waterQualityMarker;
-                    console.log("Water!");
-                    break;
-                case "Wave height and direction":
-                    image = waveHeightMarker;
-                    console.log("Wave!");
-                    break;
-            }
-
-            var infowindow = new google.maps.InfoWindow({
+		    var infowindow = new google.maps.InfoWindow({
                 content: contentString
             });
-            var marker = new google.maps.Marker({
-                position: {lat: latitude, lng: longitude},
-                map: map,
-                icon: image
-            });
+
+            var image;
+            var marker;
+            switch(data.Monitor) {
+                case "Air quality":
+                    marker = new google.maps.Marker({position: {lat: latitude, lng: longitude}, map: map, icon: airQualityMarker});
+                    airMarkers.push(marker);
+                    break;
+                case "Storm tide":
+                    marker = new google.maps.Marker({position: {lat: latitude, lng: longitude}, map: map, icon: stormTideMarker});
+                    stormMarkers.push(marker);
+                    break;
+                case "Water quality":
+                    marker = new google.maps.Marker({position: {lat: latitude, lng: longitude}, map: map, icon: waterQualityMarker});
+                    waterMarkers.push(marker);
+                    break;
+                case "Wave height and direction":
+                    marker = new google.maps.Marker({position: {lat: latitude, lng: longitude}, map: map, icon: waveHeightMarker});
+                    waveMarkers.push(marker);
+                    break;
+            }
             marker.addListener('click', function() {
                 infowindow.open(map, marker);
             });
@@ -345,6 +345,22 @@ i.icon-2x {
 		$(window).load(function(){
 			 $('#myModal').modal('show');
 	 });
+
+	function hideMarkers(markers) {
+        if (markers) {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+        }
+	}
+
+	function showMarkers(markers) {
+        if (markers) {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
+        }
+	}
 
     $(document).ready(function(){
         $("#airQualityBreakdown").hide();
@@ -364,6 +380,35 @@ i.icon-2x {
         console.log("Length is ", Object.size(airDataMap));
 
         $('#carDensity').change(onShowHideCarDensity);
+
+	     $('#airCheck').change(function() {
+            if ($("#airCheck").is(':checked')) {
+                showMarkers(airMarkers);
+            } else {
+                hideMarkers(airMarkers);
+            }
+        });
+	     $('#stormCheck').change(function() {
+            if ($("#stormCheck").is(':checked')) {
+                showMarkers(stormMarkers);
+            } else {
+                hideMarkers(stormMarkers);
+            }
+        });
+	     $('#waveCheck').change(function() {
+            if ($("#waveCheck").is(':checked')) {
+                showMarkers(waveMarkers);
+            } else {
+                hideMarkers(waveMarkers);
+            }
+        });
+        $('#waterCheck').change(function() {
+            if ($("#waterCheck").is(':checked')) {
+                showMarkers(waterMarkers);
+            } else {
+                hideMarkers(waterMarkers);
+            }
+        });
 
 	 });
 
