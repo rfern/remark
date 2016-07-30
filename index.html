@@ -45,6 +45,12 @@ html,body {
   margin-bottom: 20%;
 }
 
+.borderless table {
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+}
 
 .overlap {
  	position:relative;
@@ -331,7 +337,7 @@ i.icon-2x {
         var airData = airDataMap[data['Site name']];
         console.log(airData);
 
-        var content = "<div> <h3>Monitor Info</h3><table>" +
+        var content = "<div> <h3 style=\"text-align: center;\">Monitor Info</h3><table class=\"table borderless\">" +
 			    "<tr>" +
 				    "<td><strong>Monitor Type:</strong></td>" +
 				    "<td>" + data.Monitor + "</td>" +
