@@ -1,0 +1,149 @@
+group 'au.gov.govhack'
+version '1.0'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.3.5.RELEASE'
+        classpath 'org.mongodb:mongo-java-driver:2.13.3'
+    }
+
+}
+
+ext {
+    springfoxVersion = '2.4.0'
+    apiData = file('src/main/api')
+    apiResources = [
+        [ name: 'Air Quality Monitoring - Live data feed', url: 'http://www.ehp.qld.gov.au/cgi-bin/air/xml.php', download: false],
+        [ id: 'monitoring_sites', format: 'csv', name: 'Environmental monitoring site locations (CSV)', url: 'http://www.ehp.qld.gov.au/data-sets/monitoring/monitoring-sites-on-open-data.csv'],
+        [ id: 'npi_2015_qld_air_point_emissions', format: 'csv', name: 'npi-2015-qld-air-point-emissions', url: 'http://ehp.qld.gov.au/data-sets/npi/npi-2015-qld-air-point-emissions.csv'],
+        [ id: 'npi_2015_qld_air_fugitive_emissions', format: 'csv', name: 'npi-2015-qld-air-fugitive-emissions', url: 'http://ehp.qld.gov.au/data-sets/npi/npi-2015-qld-air-fugitive-emissions.csv'],
+        [ id: 'npi_2015_qld_air_total_emissions', format: 'csv', name: 'npi-2015-qld-air-total-emissions', url: 'http://ehp.qld.gov.au/data-sets/npi/npi-2015-qld-air-total-emissions.csv'],
+        [ id: 'npi_2015_qld_water_emissions', format: 'csv', name: 'npi-2015-qld-water-emissions', url: 'http://ehp.qld.gov.au/data-sets/npi/npi-2015-qld-water-emissions.csv'],
+        [ id: 'npi_2015_qld_land_emissions', format: 'csv', name: 'npi-2015-qld-land-emissions', url: 'http://ehp.qld.gov.au/data-sets/npi/npi-2015-qld-land-emissions.csv'],
+        [ id: 'npi_2015_qld_transfers', format: 'csv', name: 'npi-2015-qld-transfers', url: 'http://ehp.qld.gov.au/data-sets/npi/npi-2015-qld-transfers.csv']
+    ]
+}
+
+apply plugin: 'groovy'
+apply plugin: 'spring-boot'
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.spockframework:spock-spring:1.0-groovy-2.4'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.springframework.boot:spring-boot-starter-cache'
+    compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    compile 'org.springframework.boot:spring-boot-devtools'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-starter-hateoas'
+    compile 'org.springframework.boot:spring-boot-starter-jersey'
+    compile 'org.springframework.boot:spring-boot-starter-validation'
+    compile 'org.springframework.ws:spring-ws-core'
+    compile 'org.apache.httpcomponents:httpclient:4.5.2'
+    compile 'joda-time:joda-time:2.8.1'
+    compile "io.springfox:springfox-swagger2:$springfoxVersion"
+    compile "io.springfox:springfox-swagger-ui:$springfoxVersion"
+    compile 'org.springframework.boot:spring-boot-starter-tomcat'
+    compile 'org.json:json:20140107'
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.RELEASE"
+    }
+}
+
+def readApiMetaData(url) {
+    def meta = null;
+
+    (url =~ '.*/dataset/([^/]+)/resource/([^/]+)').each { text, dataset, resource ->
+        println "$dataset/$resource"
+        def metaUrl = new URL("https://data.qld.gov.au/api/3/action/package_show?id=$dataset")
+
+        println metaUrl.text
+
+        def metadata = new groovy.json.JsonSlurper().parseText(metaUrl.getText())
+        println new groovy.json.JsonBuilder(metadata).toPrettyString()
+        meta = metadata.result.resources.find { it.package_id == resource }
+    }
+    meta
+}
+
+task downloadMonitoringData {
+    doLast {
+        processCsv(file("$apiData/monitoring_sites.csv")) { row ->
+            if (row.'Update frequency' == 'Historic') {
+                def meta = readApiMetaData(row.'Resource Url')
+                println meta
+            }
+        }
+    }
+}
+
+task downloadApiData {
+    doLast {
+        apiResources.each { resource ->
+            println "$resource.name"
+            if (resource.download != null && !resource.download) return;
+
+            file("$apiData/${resource.id}.${resource.format}").text = new URL(resource.url).text
+        }
+    }
+}
+
+def processCsv(file, Closure closure) {
+   def header = null;
+    file.eachLine { line ->
+        def parts = line.split(/[,]/)
+        if (!header) {
+            header = parts
+        } else {
+            if (parts.length) {
+                def row = [header, parts].transpose().collectEntries { it }
+
+                closure.call row
+            }
+        }
+    }
+}
+
+def loadApiData(File file) {
+    def mongoClient = new com.mongodb.MongoClient()
+    def collection = mongoClient.getDB('test').getCollection(file.name.take(file.name.lastIndexOf('.')))
+    collection.drop()
+
+    def lineCount = 0
+    processCsv(file) { row ->
+        collection.insert(new com.mongodb.BasicDBObject(row))
+        lineCount++
+        if (lineCount % 100 == 1) {
+            println "$file.name [$lineCount]"
+        }
+    }
+    println "$file.name [$lineCount] DONE"
+}
+
+task importSingleApiFile {
+    doLast {
+        loadApiData file(project.apiFile)
+    }
+}
+
+task importApiData {
+    doLast {
+        apiData.eachFile { file ->
+            loadApiData file
+        }
+    }
+}
