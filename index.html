@@ -186,7 +186,7 @@ i.icon-2x {
     <div id="map"></div>
     <div class="overlap">
 
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="panel panel-success">
                 <div class="panel-heading">CBD - Polution Info</div>
                 <div class="panel-body">
@@ -280,13 +280,13 @@ i.icon-2x {
     return size;
     };
 
-    function getAirQualityData() {
-        $.get(apiUrl + "api/airquality/1", function(data) {
+    function getAirQualityDataImpl(v) {
+        $.get(apiUrl + "api/airquality/" + v, function(data) {
             $.each(data.airdata.category.region, function(i) {
                 var region = data.airdata.category.region[i];
                 $.each(region.station, function(i2) {
                     var station = region.station[i2];
-                    var measures = { };
+                    var measures = airDataMap[station.name] ? airDataMap[station.name] : { };
                     $.each(station.measurement, function(i3) {
                         var m = station.measurement[i3];
 
@@ -303,6 +303,14 @@ i.icon-2x {
         });
     }
 
+    function getAirQualityData() {
+        getAirQualityDataImpl(1);
+        getAirQualityDataImpl(2);
+        getAirQualityDataImpl(3);
+        getAirQualityDataImpl(4);
+        getAirQualityDataImpl(5);
+    }
+
 	function getMonitoringLocations() {
 		$.get(apiUrl + "api/monitoring/All", function(data) {
 		   $.each(data, function(index) {
@@ -311,7 +319,33 @@ i.icon-2x {
 		});
 	}
 
-	var airQualityMarker = "img/windmill.png";
+    function getContentString(data) {
+        console.log(data['Site name']);
+        var airData = airDataMap[data['Site name']];
+        console.log(airData);
+
+        var content = "<div> <h3>Monitor Info</h3><table>" +
+			    "<tr>" +
+				    "<td><strong>Monitor Type:</strong></td>" +
+				    "<td>" + data.Monitor + "</td>" +
+			    "</tr>" +
+			    "<tr>" +
+				    "<td><strong>Location:</strong></td>" +
+				    "<td>" + data['Site name'] + "</td>" +
+			    "</tr>";
+		$.each(airData, function(name) {
+		    var m = airData[name];
+
+            content += "<tr><td><strong>" + name + "</strong></td>" +
+                "<td>" + m.content + "</td></tr>"
+        });
+
+		content += "</table></div>";
+
+		return content;
+    }
+
+    var airQualityMarker = "img/windmill.png";
 	var airMarkers = [];
 	var stormTideMarker = "img/stormtide.png";
 	var stormMarkers = [];
@@ -320,24 +354,9 @@ i.icon-2x {
 	var waveHeightMarker = "img/wave.png";
 	var waveMarkers = [];
 
-      function placeMapMarker(latitude, longitude, data) {
-            var contentString = "<div> <h3>Monitor Info</h3><table>" +
-			"<tr>" +
-				"<td><strong>Monitor Type:</strong></td>" +
-				"<td>" + data.Monitor + "</td>" +
-			"</tr>" +
-			"<tr>" +
-				"<td><strong>Location:</strong></td>" +
-				"<td>" + data['Site name'] + "</td>" +
-			"</tr>" +
-		"</table></div>";
-
-		    var infowindow = new google.maps.InfoWindow({
-                content: contentString
-            });
-
-            var image;
+    function placeMapMarker(latitude, longitude, data) {
             var marker;
+            var image;
             switch(data.Monitor) {
                 case "Air quality":
                     marker = new google.maps.Marker({position: {lat: latitude, lng: longitude}, map: map, icon: airQualityMarker});
@@ -357,11 +376,13 @@ i.icon-2x {
                     break;
             }
             marker.addListener('click', function() {
-                infowindow.open(map, marker);
+                new google.maps.InfoWindow({
+                    content: getContentString(data)
+                }).open(map, marker);
             });
     }
 
-		$(window).load(function(){
+	 $(window).load(function(){
 			 $('#myModal').modal('show');
 	 });
 

@@ -8,8 +8,6 @@ function onShowHideCarDensity() {
 
             $.each(data, function(index) {
                 var f = data[index];
-                console.log(f);
-
                 row = { location: new google.maps.LatLng(
                           parseFloat(f.lng),
                           parseFloat(f.lat)),
