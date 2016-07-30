@@ -22,6 +22,10 @@ html,body {
     padding:0;
 }
 
+.table-borderless tbody tr td, .table-borderless tbody tr th, .table-borderless thead tr th {
+    border: none;
+}
+
 #map {
     display: block;
     position:absolute;
@@ -33,7 +37,35 @@ html,body {
     margin-top:50px;
 }
 
+.gm-style-iw {
+    max-width: 300px !important;
+    top: 5px !important;
+    left: 5px !important;
+    background-color: #71B5F1;
+    box-shadow: 5px 5px 6px #343A40  ;
+    border: 1px solid rgba(72, 181, 233, 0.6);
+    border-radius: 10px 10px 10px 10px;
+    opacity: 0.85;  
+    background: -webkit-linear-gradient(#71B5F1, white); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#71B5F1, white); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#71B5F1, white); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#71B5F1, white); /* Standard syntax */
+}
 
+#iw-container {
+    margin-bottom: 5px;
+}
+
+#iw-container .iw-content {
+    margin-right: 7px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    padding: 10px 5px 10px 15px;
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 
 /*body.modal-open div.modal-backdrop { */
     /*z-index: 0; */
@@ -151,10 +183,7 @@ i.icon-2x {
 }
 
 
-
-
-
-    </style>
+</style>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -324,7 +353,7 @@ i.icon-2x {
         var airData = airDataMap[data['Site name']];
         console.log(airData);
 
-        var content = "<div> <h3>Monitor Info</h3><table>" +
+        var content = "<div> <h3 style=\"text-align: center;\">Monitor Info</h3><table class = \"table table-borderless\">" +
 			    "<tr>" +
 				    "<td><strong>Monitor Type:</strong></td>" +
 				    "<td>" + data.Monitor + "</td>" +
@@ -337,7 +366,7 @@ i.icon-2x {
 		    var m = airData[name];
 
             content += "<tr><td><strong>" + name + "</strong></td>" +
-                "<td>" + m.content + "</td></tr>"
+                "<td style=>" + m.content + "</td></tr>"
         });
 
 		content += "</table></div>";
@@ -375,12 +404,33 @@ i.icon-2x {
                     waveMarkers.push(marker);
                     break;
             }
-            marker.addListener('click', function() {
-                new google.maps.InfoWindow({
-                    content: getContentString(data)
-                }).open(map, marker);
+
+            var infowindow = new google.maps.InfoWindow({
+                content: getContentString(data)
             });
-    }
+
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.open(map,marker);
+            });
+
+            google.maps.event.addListener(map, 'click', function() {
+                infowindow.close();
+            });
+
+            google.maps.event.addListener(infowindow, 'domready', function() {
+
+            var infWin = $('.gm-style-iw');
+            var iwCloseBtn = infWin.next().css({'display' : 'none'});
+            var iwBackground = infWin.prev();
+            iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+            iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+            iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px' });
+            /*iwCloseBtn.css({opacity: '1', border: '7px solid #48b5e9', 'box-shadow': '0 0 5px #3990B9', 'margin-left':'30px', 'padding-bottom':'20px'});
+            iwCloseBtn.mouseout(function(){
+                $(this).css({opacity: '1'});
+            });*/
+            });
+        }
 
 	 $(window).load(function(){
 			 $('#myModal').modal('show');
@@ -451,9 +501,6 @@ i.icon-2x {
         });
 
 	 });
-
-
-
 
 
 </script>
