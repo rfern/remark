@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
   <style>
 html,body {
     width:100%;
@@ -179,17 +181,35 @@ i.icon-2x {
 <div class="panel-heading">CBD - Polution Info</div>
 	<div class="panel-body">
 		<div>
-			<div id="airQuality" class="servive-block rounded servive-block-light-green">
-			 	<i class="icon-2x color-light fa fa-taxi"></i>
-			 	<h2 class="heading-md">Air Quality - Okay</h2>
-			</div>
-			<div id="airQualityBreakdown" class="servive-block rounded servive-block-light-green">
-				<i class="icon-2x color-light fa fa-taxi"></i>
-				<h2 class="heading-md">Air Quality - Breakdown</h2>
-				<p>NO2 Levels : 12ppm </p>
-				<p>CO Levels : 23ppm </p>
-				<p>SO2 Levels : 34ppm </p>
-			</div>
+            <div class="checkbox">
+                <label>
+                    <input data-toggle="toggle" type="checkbox">
+                    Air Quality
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input data-toggle="toggle" type="checkbox">
+                    Water Quality
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input data-toggle="toggle" type="checkbox">
+                    Lead Levels
+                </label>
+            </div>
+			<!--<div id="airQuality" class="servive-block rounded servive-block-light-green">-->
+			 	<!--<i class="icon-2x color-light fa fa-taxi"></i>-->
+			 	<!--<h2 class="heading-md">Air Quality - Okay</h2>-->
+			<!--</div>-->
+			<!--<div id="airQualityBreakdown" class="servive-block rounded servive-block-light-green">-->
+				<!--<i class="icon-2x color-light fa fa-taxi"></i>-->
+				<!--<h2 class="heading-md">Air Quality - Breakdown</h2>-->
+				<!--<p>NO2 Levels : 12ppm </p>-->
+				<!--<p>CO Levels : 23ppm </p>-->
+				<!--<p>SO2 Levels : 34ppm </p>-->
+			<!--</div>-->
 		</div>
 	</div>
 </div>
