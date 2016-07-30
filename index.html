@@ -248,6 +248,7 @@ i.icon-2x {
 </script>
 <script>
       var airDataMap = {};
+      var apiUrl = "http://144.6.239.142:8080/";
 
       function initMap() {
         var mapDiv = document.getElementById('map');
@@ -262,9 +263,6 @@ i.icon-2x {
 
         map.setOptions({styles: styles})
       }
-
-      var apiUrl = "http://144.6.239.142:8080/";
-      var img = "img/windmill.png";
 
     Object.size = function(obj) {
     var size = 0, key;
@@ -287,14 +285,19 @@ i.icon-2x {
     }
 
 	function getMonitoringLocations() {
-		$.get(apiUrl + "api/monitoring/Air%20quality", function(data) {
+		$.get(apiUrl + "api/monitoring/All", function(data) {
 		   $.each(data, function(index) {
-				placeMapMarker(parseFloat(data[index].Latitude), parseFloat(data[index].Longitude), data[index], img);
+				placeMapMarker(parseFloat(data[index].Latitude), parseFloat(data[index].Longitude), data[index]);
 		   });
 		});
 	}
 
-      function placeMapMarker(latitude, longitude, data, image) {
+	var airQualityMarker = "img/windmill.png";
+	var stormTideMarker = "img/stormtide.png";
+	var waterQualityMarker = "img/water.png";
+	var waveHeightMarker = "img/wave.png";
+
+      function placeMapMarker(latitude, longitude, data) {
             var contentString = "<div> <h3>Monitor Info</h3><table>" +
 			"<tr>" +
 				"<td><strong>Monitor Type:</strong></td>" +
@@ -305,6 +308,26 @@ i.icon-2x {
 				"<td>" + data['Site name'] + "</td>" +
 			"</tr>" +
 		"</table></div>";
+
+            var image;
+            switch(data.Monitor) {
+                case "Air quality":
+                    image = airQualityMarker;
+                    console.log("Air!");
+                    break;
+                case "Storm tide":
+                    image = stormTideMarker;
+                    console.log("Storm!");
+                    break;
+                case "Water quality":
+                    image = waterQualityMarker;
+                    console.log("Water!");
+                    break;
+                case "Wave height and direction":
+                    image = waveHeightMarker;
+                    console.log("Wave!");
+                    break;
+            }
 
             var infowindow = new google.maps.InfoWindow({
                 content: contentString
