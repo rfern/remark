@@ -3,18 +3,22 @@ var heatmap = null;
 function onShowHideCarDensity() {
     console.log("SHOW/HIDE");
     if (heatmap == null) {
-        $.get(apiUrl + "api/monitoring/Air%20quality", function(data) {
+        $.get(apiUrl + "/api/carOwnership", function(data) {
             var heatMapData = [ ];
 
             $.each(data, function(index) {
                 var f = data[index];
-                heatMapData.push({ location: new google.maps.LatLng(
-                        parseFloat(f.Latitude),
-                        parseFloat(f.Longitude)),
-                    weight: 5
-                });
+                console.log(f);
+
+                row = { location: new google.maps.LatLng(
+                          parseFloat(f.lng),
+                          parseFloat(f.lat)),
+                      weight: parseInt(f.CarsPerSQKM)
+                  };
+                heatMapData.push(row);
             });
-            heatmap = new google.maps.visualization.HeatmapLayer({ data: heatMapData, map: window.map });
+
+            heatmap = new google.maps.visualization.HeatmapLayer({ data: heatMapData, map: window.map, disapating: true, radius: 40 });
         });
     } else {
         heatmap.setMap(null);

@@ -37,6 +37,13 @@ class Monitoring {
         ResponseEntity.ok rawQuery(collection, query)
     }
 
+    @RequestMapping(value = "/api/carOwnership", method = GET, produces = "application/json")
+    ResponseEntity<String> carOwnership() throws Exception {
+
+        rawQueryResponse 'carownershipdata', new Query()
+    }
+
+
     @RequestMapping(value = "/api/monitoring/{type}", method = GET, produces = "application/json")
     ResponseEntity<String> monitoringLocations(
             @ApiParam(value="Monitoring type", name="type", defaultValue = "All")
