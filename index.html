@@ -218,7 +218,6 @@ i.icon-2x {
         var brisbane = {lat: -27.469, lng: 153.025};
         map = new google.maps.Map(mapDiv, {
             center: brisbane,
-            disableDefaultUI: true,
             zoom: 8
 
         });
@@ -228,13 +227,31 @@ i.icon-2x {
 
     getMonitoringLocations();
 
-        // place a test image as a marker
-        var img = "img/windmill.png";
-        placeMapMarker(-27.469, 153.025, img);
       }
 
-      function placeMapMarker(latitude, longitude, image) {
-            var contentString = "<div> <h3>Some interesting info</h3> </div>";
+      var apiUrl = "http://144.6.239.142:8080/";
+      var img = "img/windmill.png";
+
+	function getMonitoringLocations() {
+		$.get(apiUrl + "api/monitoring/Air%20quality", function(data) {
+		   $.each(data, function(index) {
+				placeMapMarker(parseFloat(data[index].Latitude), parseFloat(data[index].Longitude), data[index], img);
+		   });
+		});
+	}
+
+      function placeMapMarker(latitude, longitude, data, image) {
+            var contentString = "<div> <h3>Monitor Info</h3><table>" +
+			"<tr>" +
+				"<td><strong>Monitor Type:</strong></td>" +
+				"<td>" + data.Monitor + "</td>" +
+			"</tr>" +
+			"<tr>" +
+				"<td><strong>Location:</strong></td>" +
+				"<td>" + data['Site name'] + "</td>" +
+			"</tr>" +
+		"</table></div>";
+
             var infowindow = new google.maps.InfoWindow({
                 content: contentString
             });
