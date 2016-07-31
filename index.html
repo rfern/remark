@@ -46,17 +46,19 @@
 <div id="content">
     <div id="map"></div>
     <div class="overlap">
-
+        
         <div class="col-sm-3">
             <div class="panel panel-success">
                 <div id="panelHeading" class="panel-heading text-center" data-toggle="collapse" data-target="#panelCollapse">Pollution Info<span id="Glyph-Chevron" class="glyphicon glyphicon-chevron-up pull-right"></span></div>
                 <div class="panel-body" id="panelCollapse">
                     <div>
                         <div class="text-center">
-                            <h4><strong>Your Location:</strong> <span id="userLocation"></span></h4>
+                            <h4><strong>Your Location:</strong></h4>
+                            <span id="userLocation"></span>
+                            <div class="pre-scrollable" style="max-height: 140px;">
                             <div id="stationData" class="smallpanel">
-
                             </div>
+                        </div>
                         </div>
                         <br/>
                         <h4> Toggle Options</h4>
@@ -115,8 +117,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
 </div>
