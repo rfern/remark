@@ -16,7 +16,7 @@ function onShowHideCarDensity() {
                 heatMapData.push(row);
             });
 
-            heatmap = new google.maps.visualization.HeatmapLayer({ data: heatMapData, map: window.map, disapating: true, radius: 40 });
+            heatmap = new google.maps.visualization.HeatmapLayer({ data: heatMapData, map: window.map, disapating: true, radius: 120 });
         });
     } else {
         heatmap.setMap(null);

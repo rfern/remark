@@ -76,6 +76,8 @@ i.icon-2x {
     color:#FFFFFF;
 }
 
+
+
 /*Colored Content Boxes
 ------------------------------------*/
 .servive-block {
@@ -156,7 +158,46 @@ i.icon-2x {
   background: #ecf0f1;
 }
 
+td.airquality0 {
+    background-color: #ffffff;
+    color: #000000;
+    text-align: center;
+}
 
+td.airquality1 {
+    background-color: #66CCFF;
+    color: #000000;
+    text-align: center;
+}
+
+td.airquality2 {
+    background-color: #99CC66;
+    color: #000000;
+    text-align: center;
+}
+
+td.airquality3 {
+    background-color: #9999CC;
+    color: #000000;
+    text-align: center;
+}
+
+td.airquality4 {
+    background-color: #CC3366;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+td.airquality5 {
+    background-color: #666666;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+td.legend {
+    border: 1px solid black;
+    padding: 5px;
+}
 
 
 
@@ -212,19 +253,19 @@ i.icon-2x {
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input id="stormCheck" data-toggle="toggle" type="checkbox" checked>
+                                <input id="stormCheck" data-toggle="toggle" type="checkbox">
                                 Storm Tide
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input id="waterCheck" data-toggle="toggle" type="checkbox" checked>
+                                <input id="waterCheck" data-toggle="toggle" type="checkbox">
                                 Water Quality
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input id="waveCheck" data-toggle="toggle" type="checkbox" checked>
+                                <input id="waveCheck" data-toggle="toggle" type="checkbox">
                                 Wave height and direction
                             </label>
                         </div>
@@ -234,6 +275,16 @@ i.icon-2x {
                                 Car Density
                             </label>
                         </div>
+                        <table>
+                            <tr>
+                                <td class="legend airquality0">Not available</td>
+                                <td class="legend airquality1">Very good</td>
+                                <td class="legend airquality2">Good</td>
+                                <td class="legend airquality3">Fair</td>
+                                <td class="legend airquality4">Poor</td>
+                                <td class="legend airquality5">Very poor</td>
+                            </tr>
+                        </table>
                         <!--<div id="airQuality" class="servive-block rounded servive-block-light-green">-->
                         <!--<i class="icon-2x color-light fa fa-taxi"></i>-->
                         <!--<h2 class="heading-md">Air Quality - Okay</h2>-->
@@ -270,7 +321,7 @@ i.icon-2x {
         var brisbane = {lat: -27.469, lng: 153.025};
         window.map = new google.maps.Map(mapDiv, {
             center: brisbane,
-            zoom: 8,
+            zoom: 14,
             streetViewControl: false,
             mapTypeControlOptions: {
                 style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
@@ -303,12 +354,19 @@ i.icon-2x {
                     $.each(station.measurement, function(i3) {
                         var m = station.measurement[i3];
 
-                        measures[m.name] = {
-                           rating: m.rating,
-                           index: m.index,
-                           rating_name: m.rating_name,
-                           content: m.content
-                        };
+                        if (m != undefined) {
+                            if (parseFloat(m.content) < 0.0) {
+                                m.rating = 0;
+                                m.content = 'Unavailable';
+                            }
+
+                            measures[m.name] = {
+                               rating: m.rating,
+                               index: m.index,
+                               rating_name: m.rating_name,
+                               content: m.content
+                            }
+                        }
                     });
                     airDataMap[station.name] = measures;
                 });
@@ -337,20 +395,16 @@ i.icon-2x {
         var airData = airDataMap[data['Site name']];
         console.log(airData);
 
-        var content = "<div> <h3 style=\"text-align: center;\">Monitor Info</h3><table class=\"table borderless\">" +
+        var content = "<div> <h3 style=\"text-align: center;\">" + data['Site name'] + "</h3><table class=\"table borderless\">" +
 			    "<tr>" +
 				    "<td><strong>Monitor Type:</strong></td>" +
 				    "<td>" + data.Monitor + "</td>" +
-			    "</tr>" +
-			    "<tr>" +
-				    "<td><strong>Location:</strong></td>" +
-				    "<td>" + data['Site name'] + "</td>" +
 			    "</tr>";
 		$.each(airData, function(name) {
 		    var m = airData[name];
 
             content += "<tr><td><strong>" + name + "</strong></td>" +
-                "<td>" + m.content + "</td></tr>"
+                "<td class='airquality" + m.rating + "' title='" + m.rating_name + "'>" + m.content + "</td></tr>"
         });
 
 		content += "</table></div>";
@@ -376,15 +430,15 @@ i.icon-2x {
                     airMarkers.push(marker);
                     break;
                 case "Storm tide":
-                    marker = new google.maps.Marker({position: {lat: latitude, lng: longitude}, map: map, icon: stormTideMarker});
+                    marker = new google.maps.Marker({position: {lat: latitude, lng: longitude}, icon: stormTideMarker});
                     stormMarkers.push(marker);
                     break;
                 case "Water quality":
-                    marker = new google.maps.Marker({position: {lat: latitude, lng: longitude}, map: map, icon: waterQualityMarker});
+                    marker = new google.maps.Marker({position: {lat: latitude, lng: longitude}, icon: waterQualityMarker});
                     waterMarkers.push(marker);
                     break;
                 case "Wave height and direction":
-                    marker = new google.maps.Marker({position: {lat: latitude, lng: longitude}, map: map, icon: waveHeightMarker});
+                    marker = new google.maps.Marker({position: {lat: latitude, lng: longitude}, icon: waveHeightMarker});
                     waveMarkers.push(marker);
                     break;
             }
