@@ -16,6 +16,7 @@ Within the Springboot application, the program is written in Groovy. Using the b
 The front-end web interface is programmed in JavaScript, HTML and CSS, and served from Springboot. The open source libraries used were Bootstrap, J-Query, and the Google Map JavaScript API.
 In the age of Internet Of Things, sensors have the potential to be implemented in a range of locations and monitor air quality. This crowdsourcing of data will be invaluable.
 
+![alt text](https://github.com/rfern/remark/blob/master/img/screenshot.png "Sample screenshot")
 
 ## Team Remark
 
