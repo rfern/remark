@@ -1,7 +1,7 @@
 # Breathe Easy
 
 * [Project Page](https://2016.hackerspace.govhack.org/content/breathe-easy)
-* [Submission Video](tbd)
+* [Submission Video](https://www.youtube.com/watch?v=oJ8S8FV0yag&feature=youtu.be)
 
 REMARK
 
@@ -44,7 +44,7 @@ To do.
 
 The MIT License (MIT)
 
-Copyright (c) [2014] [Team Rameelcajo]
+Copyright (c) [2016] [Team Remark]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
