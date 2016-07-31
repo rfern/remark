@@ -16,7 +16,13 @@ html,body {
     margin-top:50px;
 }
 
+@media screen and (min-width: 0px) and (max-width: 400px) {
+  #menuItemsRight { display: none; }  /* hide menu items on small screens */
+}
 
+@media screen and (min-width: 401px) and (max-width: 2500px) {
+  #menuItemsRight { display: block; }   /* show menu items elsewhere */
+}
 
 /*body.modal-open div.modal-backdrop { */
     /*z-index: 0; */
