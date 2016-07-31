@@ -80,6 +80,7 @@ var heatmap = null;
 function onShowHideCarDensity() {
     console.log("SHOW/HIDE");
     if (heatmap == null) {
+    /*
         $.get(apiUrl + "/api/carOwnership", function(data) {
             var heatMapData = [ ];
 
@@ -99,7 +100,22 @@ function onShowHideCarDensity() {
                   heatmap.setOptions({radius:getNewRadius()});
             });
 
-        });
+        });*/
+
+        heatmap = new google.maps.FusionTablesLayer({
+                       map: map,
+                       heatmap: { enabled: false },
+                       query: {
+                         select: "col0\x3e\x3e1",
+                         from: "14s1tGeXai4g7hfnrPw51zvMSenp2jDKfKx7RzRbP",
+                         where: ""
+                       },
+                       options: {
+                         styleId: 3,
+                         templateId: 5
+                       }
+                     });
+          heatmap.setMap(map);
     } else {
         heatmap.setMap(null);
         heatmap = null;

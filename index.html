@@ -34,7 +34,7 @@
                     <a class="page-scroll" href="#about"><span class="glyphicon glyphicon-info-sign"></span> About</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#heatmap"><span class="glyphicon glyphicon-fire"></span> Heat Map</a>
+                    <a class="page-scroll" id="pollution" href="#pollution"><span class="glyphicon glyphicon-fire"></span>Pollution</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="#search"><span class="glyphicon glyphicon-search"></span> Search </a>
@@ -343,6 +343,9 @@
         }
     }
 
+    function togglePollutionWindow() {
+        $('#panelHeading').click();
+    }
 
 
     $(document).ready(function(){
@@ -354,6 +357,11 @@
 	    $("#airQualityBreakdown").click(function(){
 	        $("#airQuality").show();
 			$("#airQualityBreakdown").hide();
+	    });
+
+	    $("#pollution").click(function() {
+	        console.log('Toggle');
+	        togglePollutionWindow();
 	    });
 
         getMonitoringLocations();
