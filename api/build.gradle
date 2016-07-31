@@ -64,6 +64,18 @@ dependencyManagement {
     }
 }
 
+task processStaticResources(type: Copy) {
+    from ('..') {
+        include 'css/**/*'
+        include 'img/**/*'
+        include 'js/**/*'
+        include 'index.html'
+    }
+    into 'src/main/resources/static'
+}
+
+processResources.dependsOn processStaticResources
+
 def readApiMetaData(url) {
     def meta = null;
 

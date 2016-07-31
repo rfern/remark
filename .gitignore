@@ -1,5 +1,7 @@
 .idea
 **/.DS_Store
+api/build
+api/src/main/resources/static
 
 
 

@@ -54,8 +54,9 @@
                     <div>
                         <div class="text-center">
                             <h4><strong>Your Location:</strong> <span id="userLocation"></span></h4>
-                            <h4><strong>Air Quality:</strong> Good</h4>
-                            <h4><strong>Particle PM10:</strong> 24.6 </h4>
+                            <div id="stationData" class="smallpanel">
+
+                            </div>
                         </div>
                         <br/>
                         <h4> Toggle Options</h4>
@@ -115,14 +116,16 @@
             </div>
         </div>
 
+
     </div>
+</div>
 </div>
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
 <!-- <script src="js/angular-google-maps.js"></script> -->
 <script src="js/app.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_Rkfsf2_5bxg2DYbDOpH4xfAr2cIjIEo&callback=initMap&sensor=false&libraries=visualization,geometry" async
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_Rkfsf2_5bxg2DYbDOpH4xfAr2cIjIEo&callback=initMap&libraries=visualization,geometry" async
         defer>
 </script>
 <script>
@@ -132,6 +135,7 @@
         var mapDiv = document.getElementById('map');
         var brisbane = {lat: -27.469, lng: 153.025};
         window.map = new google.maps.Map(mapDiv, {
+            center: brisbane,
             zoom: 14,
             streetViewControl: false,
             mapTypeControlOptions: {
@@ -140,13 +144,14 @@
             }
         });
         var styles = [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#6195a0"}]},{"featureType":"administrative.province","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"lightness":"0"},{"saturation":"0"},{"color":"#f5f5f2"},{"gamma":"1"}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"lightness":"-3"},{"gamma":"1.00"}]},{"featureType":"landscape.natural.terrain","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#bae5ce"},{"visibility":"on"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45},{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#fac9a9"},{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"labels.text","stylers":[{"color":"#4e4e4e"}]},{"featureType":"road.arterial","elementType":"labels.text.fill","stylers":[{"color":"#787878"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"transit.station.airport","elementType":"labels.icon","stylers":[{"hue":"#0a00ff"},{"saturation":"-77"},{"gamma":"0.57"},{"lightness":"0"}]},{"featureType":"transit.station.rail","elementType":"labels.text.fill","stylers":[{"color":"#43321e"}]},{"featureType":"transit.station.rail","elementType":"labels.icon","stylers":[{"hue":"#ff6c00"},{"lightness":"4"},{"gamma":"0.75"},{"saturation":"-68"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#eaf6f8"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#c7eced"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"lightness":"-49"},{"saturation":"-53"},{"gamma":"0.79"}]}]
-
         map.setOptions({styles: styles})
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 locationCoords = {lat: position.coords.latitude, lng: position.coords.longitude};
                 console.log(locationCoords);
                 map.setCenter(locationCoords);
+                centerMarker.setPosition(locationCoords);
+
                 console.log(position);
                 var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyA_Rkfsf2_5bxg2DYbDOpH4xfAr2cIjIEo";
                 var location = $.ajax({
@@ -164,10 +169,22 @@
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
+        window.centerMarker = new google.maps.Marker({ position: map.getCenter(), map: map, draggable:true, animation: google.maps.Animation.DROP,});
+        google.maps.event.addListener(centerMarker, 'dragend', function() {
+            onMarkerMoved(centerMarker.getPosition());
+        });
     }
 
     var apiUrl = "http://144.6.239.142:8080/";
     var img = "img/windmill.png";
+
+    Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+    };
 
     function getAirQualityDataImpl(v) {
         $.get(apiUrl + "api/airquality/" + v, function(data) {
@@ -197,6 +214,7 @@
                 });
             });
             updateAirQualityIcons();
+            onMarkerMoved(centerMarker.getPosition());
         });
     }
 
@@ -223,6 +241,7 @@
             //console.log("Air Quality:", marker.name, max);
             marker.icon = "img/air/windmill_" + max + ".png"
         });
+        showMarkers(airMarkers);
     }
 
 	function getMonitoringLocations() {
@@ -233,7 +252,7 @@
 		});
 	}
 
-    function getContentString(data) {
+    function getStationHtml(data) {
         var airData = airDataMap[data['Site name']];
 
         var content = "<div> <h3 style=\"text-align: center;\">" + data['Site name'] + "</h3><table class=\"table borderless\">" +
@@ -267,25 +286,25 @@
             var image;
             switch(data.Monitor) {
                 case "Air quality":
-                    marker = new google.maps.Marker({name: data['Site name'], position: {lat: latitude, lng: longitude}, map: map, icon: airQualityMarker});
+                    marker = new google.maps.Marker({name: data['Site name'], station: data, position: {lat: latitude, lng: longitude}, map: map, icon: airQualityMarker});
                     airMarkers.push(marker);
                     break;
                 case "Storm tide":
-                    marker = new google.maps.Marker({name: data['Site name'], position: {lat: latitude, lng: longitude}, icon: stormTideMarker});
+                    marker = new google.maps.Marker({name: data['Site name'], station: data, position: {lat: latitude, lng: longitude}, icon: stormTideMarker});
                     stormMarkers.push(marker);
                     break;
                 case "Water quality":
-                    marker = new google.maps.Marker({name: data['Site name'], position: {lat: latitude, lng: longitude}, icon: waterQualityMarker});
+                    marker = new google.maps.Marker({name: data['Site name'], station: data, position: {lat: latitude, lng: longitude}, icon: waterQualityMarker});
                     waterMarkers.push(marker);
                     break;
                 case "Wave height and direction":
-                    marker = new google.maps.Marker({name: data['Site name'], position: {lat: latitude, lng: longitude}, icon: waveHeightMarker});
+                    marker = new google.maps.Marker({name: data['Site name'], station: data, position: {lat: latitude, lng: longitude}, icon: waveHeightMarker});
                     waveMarkers.push(marker);
                     break;
             }
             marker.addListener('click', function() {
                 new google.maps.InfoWindow({
-                    content: getContentString(data)
+                    content: getStationHtml(data)
                 }).open(map, marker);
             });
     }
@@ -310,6 +329,26 @@
         }
 	}
 
+    function onMarkerMoved(center) {
+        var marker = null;
+        var max = 100000.0;
+
+        $.each(airMarkers, function(i) {
+            var m = airMarkers[i];
+            var d = google.maps.geometry.spherical.computeDistanceBetween(center, m.position);
+            if (d < max) {
+                max = d;
+                marker = m;
+            }
+        });
+
+        if (marker != null) {
+            $('#stationData').html(getStationHtml(marker.station));
+        }
+    }
+
+
+
     $(document).ready(function(){
         $("#airQualityBreakdown").hide();
 	    $("#airQuality").click(function(){
@@ -321,8 +360,8 @@
 			$("#airQualityBreakdown").hide();
 	    });
 
-	    getAirQualityData();
         getMonitoringLocations();
+	    getAirQualityData();
 
         $('#carDensity').change(onShowHideCarDensity);
 

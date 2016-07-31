@@ -51,7 +51,7 @@
       //Mercator --END--
 
 
-	  var desiredRadiusPerPointInMeters = 20000;
+	  var desiredRadiusPerPointInMeters = 15000;
       function getNewRadius() {
 
 
